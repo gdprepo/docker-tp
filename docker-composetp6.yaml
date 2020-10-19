@@ -1,0 +1,34 @@
+version:  '3.7'
+
+services:
+  maria-master:
+    image: mariadb:10.5
+    ports: 
+      - 3306
+    networks:
+      mon-network:
+        aliases:
+            - maria-master.localhost
+    environment: 
+      MYSQL_ROOT_PASSWORD: password
+    volumes: 
+      - ./scripts:/scripts/master-user.sql
+      - ./maria-master:/var/lib/mysql
+      - ./backups:/backups
+  
+  maria-slave:
+    image: mariadb:10.5
+    ports: 
+      - 3306
+    networks:
+      - mon-network
+    environment: 
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./maria-slave:/var/lib/mysql
+      - ./backups:/backups
+  
+networks:
+  mon-network:
+ # mariadb:
+    #  external: true
