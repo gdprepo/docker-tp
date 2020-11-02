@@ -1,5 +1,0 @@
-FROM mysql:latest
-
-RUN apt-get update -yq && apt-get install htop -yq && apt-get install cron -yq && apt-get install logrotate -yq && apt-get install vim -yq && sudo apt-get install mysql-server -yq
-
-ENV TZ Europe/Paris && MYSQL_ROOT_PASSWORD password
